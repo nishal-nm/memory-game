@@ -1,0 +1,35 @@
+.card {
+  width: 100px; /* Default card size */
+  height: 140px;
+  border-radius: 12px; /* Rounded corners */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem; /* Default font size */
+  font-weight: bold;
+  background-color: #ffffff;
+  border: 2px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card.flipped {
+  background-color: #4caf50;
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transform: rotateY(180deg); /* Flip when card is flipped */
+}
+
+/* Smaller card size for smaller screens */
+@media (max-width: 600px) {
+  .card {
+    width: 70px; /* Reduce width */
+    height: 98px; /* Reduce height */
+    font-size: 1.5rem; /* Reduce font size */
+  }
+}

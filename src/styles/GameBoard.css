@@ -1,0 +1,17 @@
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(
+    4,
+    1fr
+  ); /* Keep the same number of cards per row */
+  gap: 15px; /* Adjust spacing between cards */
+  margin: 0 auto;
+  width: fit-content;
+}
+
+/* For smaller screens (e.g., below 600px) */
+@media (max-width: 600px) {
+  .game-board {
+    gap: 10px; /* Reduce spacing between cards */
+  }
+}
