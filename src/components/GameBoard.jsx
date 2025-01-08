@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import ReactConfetti from "react-confetti";
 import "../styles/GameBoard.css";
 import Card from "./Card";
 
@@ -6,9 +7,24 @@ function GameBoard(props) {
   const [cards, setCards] = useState(shuffleCards());
   const [flippedCards, setFlippedCards] = useState([]);
   const [matchedCards, setMatchedCards] = useState([]);
+  const [win, setWin] = useState(false);
+
+  useEffect(() => {
+    // Check if all cards are matched
+    if (matchedCards.length === cards.length) {
+      setWin(true); // Set as won
+    }
+  }, [matchedCards, cards.length]);
 
   function handleCardClick(index) {
-    if (flippedCards.length === 2 || matchedCards.includes(index)) return;
+    // Prevent clicking on the same card twice or on already matched cards
+    if (
+      flippedCards.length === 2 ||
+      matchedCards.includes(index) ||
+      cards[index].flipped
+    ) {
+      return;
+    }
 
     const newCards = [...cards];
     newCards[index].flipped = true;
@@ -41,6 +57,7 @@ function GameBoard(props) {
 
   return (
     <div className="game-board">
+      {win && <ReactConfetti />}
       {cards.map((card, index) => (
         <Card
           key={index}
@@ -54,7 +71,7 @@ function GameBoard(props) {
 }
 
 function shuffleCards() {
-  const values = ["🍎", "🍌", "🍇", "🍉", "🍋", "🍓"];
+  const values = ["🍎", "🍌", "🍇", "🍉", "🍋", "🍓", "🥥", "🍒"];
   const cards = values
     .concat(values) // Create pairs
     .map((value, index) => ({ id: index, value, flipped: false }));
